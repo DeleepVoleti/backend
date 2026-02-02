@@ -44,10 +44,10 @@ pipeline{
 
         stage('Build'){
             steps{
-                sh """
+                script{
                 zip -q -r backend-${env.APP_VERSION}.zip . -x Jenkinsfile -x backend-${env.APP_VERSION}.zip
                 ls -ltr
-                """
+                }
             }
         }
 
