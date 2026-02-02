@@ -6,27 +6,36 @@ pipeline{
         timeout(time:10, unit:'MINUTES')
         ansiColor('xterm')
     }
-    parameters {
-        choice(
-            name: 'ACTION',
-            choices: ['apply', 'destroy'],
-            description: 'Select Terraform action'
-        )
-    }
-    stages{
-        stage("init"){
-            steps{
+    environment{
+        def app_version = '' // i defined app version here
 
-                
-                sh """
-                   npm install
-                   ls -ltr
-                """
+    }
+     
+    stages{
+        stage("read app version"){
+            steps{
+               script{
+                def JSON = readJSON : 'package.json'
+                app_version = JSON.version
+
+               }
             }
         }
     }
 
+     stages{
+        stage("install dependencies"){
+            steps{
 
+                sh """
+                   npm install
+                   ls -ltr
+                   echo $app_version
+                """
+            }
+        }
+    }
+    
       post{
         always{
             deleteDir()
