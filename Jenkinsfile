@@ -33,14 +33,14 @@ pipeline{
             }
         }
 
-        stage("zipping the files "){
-            steps{
+        // stage("zipping the files "){
+        //     steps{
 
-                sh """
-               zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
-                """
-            }
-        }
+        //         sh """
+        //        zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
+        //         """
+        //     }
+        // }
 
 
     }
