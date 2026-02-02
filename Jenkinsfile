@@ -1,52 +1,53 @@
-pipeline {
+pipeline{
     agent {
         label 'Agent-1'
     }
-
-    options {
-        timeout(time: 10, unit: 'MINUTES')
+    options{
+        timeout(time:10, unit:'MINUTES')
         ansiColor('xterm')
     }
+    environment{
+        def appVersion = '' // i defined app version here
 
-    environment {
-        APP_VERSION = ''   // ✅ environment variables are UPPERCASE
     }
+     
+    stages{
+        stage("read app version"){
+            steps{
+               script{
+                def JSON = readJSON file: 'package.json'
+                env.appVersion = JSON.version
 
-    stages {
-
-        stage('read app version') {
-            steps {
-                script {
-                    def json = readJSON file: 'package.json'
-                    env.APP_VERSION = json.version   // ✅ correct way
-                }
+               }
             }
         }
 
-        stage('install dependencies') {
-            steps {
+        stage("install dependencies"){
+            steps{
+
                 sh """
-                  npm install
-                  ls -ltr
-                  echo ${APP_VERSION}
+                   npm install
+                   ls -ltr
+                   echo $appVersion
                 """
             }
         }
 
-        stage('zipping the files') {
-            steps {
+        stage("zipping the files "){
+            steps{
+
                 sh """
-                  zip -r -q backend-${APP_VERSION}.zip * \
-                    -x Jenkinsfile \
-                    -x backend-${APP_VERSION}.zip
+               zip -q -r backend-${appVersion}.zip * -x Jenkinsfile -x backend-${appVersion}.zip
                 """
             }
         }
-    }
 
-    post {
-        always {
+
+    }
+    
+      post{
+        always{
             deleteDir()
         }
-    }
+    }  
 }
