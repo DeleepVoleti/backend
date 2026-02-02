@@ -23,22 +23,12 @@ pipeline{
                 """
             }
         }
-        stage("plan"){
-            when{
-                expression{params.ACTION == 'apply'}
-            }
-            steps{
-                sh """
-                   cd 01-vpc
-                   terraform plan
-                """
-            }
-        }
-        
+    }
+
+
       post{
         always{
             deleteDir()
         }
     }  
-    }
 }
