@@ -1,3 +1,6 @@
+
+def appVersion = ''
+
 pipeline {
     agent {
         label 'Agent-1'
@@ -11,10 +14,9 @@ pipeline {
     //     booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
     // }
 
-    def appVersion = ''
 
     environment{
-         appVersion = '' //variable declaration
+        // appVersion = '' //variable declaration
          nexusUrl = 'nexus.dilipswebsite.online:8081'
         // region = "us-east-1"
         // account_id = "315069654700"
@@ -115,7 +117,7 @@ pipeline {
             steps{
                 script{
                  def params = [
-                    string(name:'appVersion', value: env.appVersion )
+                    string(name:'appVersion', value: appVersion )
                  ]
                  build job :'backend-deploy', parameters: params ; wait:false
                 }
