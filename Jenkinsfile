@@ -10,8 +10,11 @@ pipeline {
     // parameters{
     //     booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
     // }
+
+    def appVersion = ''
+
     environment{
-        def appVersion = '' //variable declaration
+         appVersion = '' //variable declaration
          nexusUrl = 'nexus.dilipswebsite.online:8081'
         // region = "us-east-1"
         // account_id = "315069654700"
