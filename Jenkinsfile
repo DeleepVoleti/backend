@@ -108,7 +108,7 @@ pipeline {
                 }
             }
         } 
-        /* stage('Deploy'){
+         stage('Deploy'){
             when{
                 expression{
                     params.deploy
@@ -116,14 +116,14 @@ pipeline {
             }
             steps{
                 script{
-                    def params = [
-                        string(name: 'appVersion', value: "${appVersion}")
-                    ]
-                    build job: 'backend-deploy', parameters: params, wait: false
+                 def params = [
+                    string(name:'appVersion', value:${appVersion} )
+                 ]
+                 build job :'backend-deploy', parameters: params ; wait:false
                 }
             }
-        } */
-    }
+        } 
+   }
     post { 
         always { 
             deleteDir()
