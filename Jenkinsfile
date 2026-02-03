@@ -12,7 +12,7 @@ pipeline {
     // }
     environment{
         def appVersion = '' //variable declaration
-        // nexusUrl = 'nexus.daws78s.online:8081'
+         nexusUrl = 'nexus.dilipswebsite.online:8081'
         // region = "us-east-1"
         // account_id = "315069654700"
     }
@@ -87,7 +87,7 @@ pipeline {
             }
         } */
 
-        /* stage('Nexus Artifact Upload'){
+         stage('Nexus Artifact Upload'){
             steps{
                 script{
                     nexusArtifactUploader(
@@ -107,7 +107,7 @@ pipeline {
                     )
                 }
             }
-        } */
+        } 
         /* stage('Deploy'){
             when{
                 expression{
