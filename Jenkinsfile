@@ -10,10 +10,10 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    // parameters{
-    //     booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
-    // }
-
+    parameters{
+         booleanParam(name: 'deploy', defaultValue: false, description: 'Toggle this value')
+     }
+ 
 
     environment{
         // appVersion = '' //variable declaration
@@ -114,6 +114,10 @@ pipeline {
             }
         } 
          stage('trigger backend-Deploy'){
+            when{
+                expression{
+                    params.deploy
+                }
             steps{
                 script{
                  def params = [
