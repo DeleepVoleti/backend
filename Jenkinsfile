@@ -6,7 +6,7 @@ pipeline {
         label 'Agent-1'
     }
     options {
-        timeout(time: 30, unit: 'MINUTES')
+        timeout(time: 20, unit: 'MINUTES')
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
@@ -113,7 +113,7 @@ pipeline {
                 }
             }
         } 
-         stage('Deploy'){
+         stage('trigger backend-Deploy'){
             steps{
                 script{
                  def params = [
