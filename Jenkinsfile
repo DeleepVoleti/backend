@@ -124,7 +124,7 @@ pipeline {
                  def params = [
                     string(name:'appVersion', value: appVersion )
                  ]
-                 build job :'backend-deploy', parameters: params ; wait:false
+                 build job :'backend-deploy', parameters: params ; wait:false ; propagate: false
                 }
             }
         } 
